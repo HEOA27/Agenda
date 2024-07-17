@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VerActivity extends AppCompatActivity {
 
-    EditText txtNombre, txtTelefono, txtCorreo;
+    EditText txtNombre, txtTelefono, txtCorreo, txtDireccion;
     Button btnGuarda;
     FloatingActionButton fabEditar, fabEliminar;
 
@@ -33,6 +33,7 @@ public class VerActivity extends AppCompatActivity {
         txtNombre = findViewById(R.id.txtNombre);
         txtTelefono = findViewById(R.id.txtTelefono);
         txtCorreo = findViewById(R.id.txtCorreoElectronico);
+        txtDireccion=findViewById(R.id.txtDireccion);
         fabEditar = findViewById(R.id.fabEditar);
         fabEliminar = findViewById(R.id.fabEliminar);
         btnGuarda = findViewById(R.id.btnGuarda);
@@ -56,9 +57,11 @@ public class VerActivity extends AppCompatActivity {
             txtNombre.setText(contacto.getNombre());
             txtTelefono.setText(contacto.getTelefono());
             txtCorreo.setText(contacto.getCorreo_electornico());
+            txtDireccion.setText(contacto.getDireccion());
             txtNombre.setInputType(InputType.TYPE_NULL);
             txtTelefono.setInputType(InputType.TYPE_NULL);
             txtCorreo.setInputType(InputType.TYPE_NULL);
+            txtDireccion.setInputType(InputType.TYPE_NULL);
         }
 
         fabEditar.setOnClickListener(new View.OnClickListener() {

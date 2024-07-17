@@ -20,7 +20,7 @@ public class DbContactos extends DbHelper {
         this.context = context;
     }
 
-    public long insertarContacto(String nombre, String telefono, String correo_electronico) {
+    public long insertarContacto(String nombre, String telefono, String correo_electronico, String direccion) {
 
         long id = 0;
 
@@ -32,7 +32,7 @@ public class DbContactos extends DbHelper {
             values.put("nombre", nombre);
             values.put("telefono", telefono);
             values.put("correo_electronico", correo_electronico);
-
+            values.put("direccion", direccion);
             id = db.insert(TABLE_CONTACTOS, null, values);
         } catch (Exception ex) {
             ex.toString();
@@ -84,6 +84,7 @@ public class DbContactos extends DbHelper {
             contacto.setNombre(cursorContactos.getString(1));
             contacto.setTelefono(cursorContactos.getString(2));
             contacto.setCorreo_electornico(cursorContactos.getString(3));
+            contacto.setDireccion(cursorContactos.getString(4));
         }
 
         cursorContactos.close();
@@ -91,7 +92,7 @@ public class DbContactos extends DbHelper {
         return contacto;
     }
 
-    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico) {
+    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico, String direccion) {
 
         boolean correcto = false;
 
@@ -99,7 +100,8 @@ public class DbContactos extends DbHelper {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         try {
-            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
+            //db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
+            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "',direccion = '" + direccion + "' WHERE id='" + id + "' ");
             correcto = true;
         } catch (Exception ex) {
             ex.toString();
