@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewFechaNac"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,7 +18,8 @@
             android:id="@+id/viewNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hint_nombre" />
+            android:text="@string/hint_nombre"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/txtNombre"
@@ -28,10 +31,38 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/txtSexo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_sexo"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbFemenino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Femenino"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masculino"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+        <TextView
             android:id="@+id/viewTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hint_telefono" />
+            android:text="@string/hint_telefono"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/txtTelefono"
@@ -43,10 +74,67 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/viewDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_direccion"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/txtDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:lines="2" />
+
+        <TextView
+            android:id="@+id/viewFechaNac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_fecha_nacimiento"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnCalendario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+            <EditText
+                android:id="@+id/txtFechaNacimiento"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/viewEdad"
+                android:layout_width="2dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_edad" />
+
+            <TextView
+                android:id="@+id/txtViewEdad"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/viewCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hint_correo_electronico" />
+            android:text="@string/hint_correo_electronico"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/txtCorreoElectronico"
@@ -57,25 +145,77 @@
             android:labelFor="@+id/viewCorreo"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/viewDireccion"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hint_direccion" />
+            android:layout_marginTop="3dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_grupo"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/cbxGrupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:entries="@array/strGrupos" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTipo"
+                android:layout_width="187dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_tipo"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/cbxTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/strTipos" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/viewNota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/hint_nota"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/txtDireccion"
+            android:id="@+id/txtNota"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:lines="4" />
+
+        <TextView
+            android:id="@+id/txtFechaRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text" />
+            android:layout_marginTop="3dp" />
 
         <Button
             android:id="@+id/btnGuarda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="3dp"
             android:text="@string/btn_guarda"
             android:textSize="18sp" />
+
     </LinearLayout>
 </LinearLayout>

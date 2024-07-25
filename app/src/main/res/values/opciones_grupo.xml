@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="strGrupos">
+        <item>Adolescentes</item>
+        <item>Adultos</item>
+        <item>Iglesia Infantil</item>
+        <item>Jóvenes</item>
+        <item>Mujeres</item>
+        <item>Varones</item>
+    </string-array>
+</resources>

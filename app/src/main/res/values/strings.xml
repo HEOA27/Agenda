@@ -4,6 +4,18 @@
     <string name="hint_telefono">Telefono:</string>
     <string name="hint_correo_electronico">Correo electronico:</string>
     <string name="hint_direccion">Dirección:</string>
+    <string name="hint_fecha_nacimiento">Fecha de nacimiento:</string>
+    <string name="hint_edad">Edad:</string>
+    <string name="hint_fecha_registro">Fecha de registro:</string>
+    <string name="hint_grupo">Seleccione un grupo:</string>
+    <string name="hint_sexo">Sexo:</string>
+    <string name="hint_nota">Notas:(ejemplos: Años congregación,Gustos,Ocupación)</string>
+
+    <string name="hint_tipo">Seleccione un tipo:</string>
+
+
+
+
     <string name="btn_guarda">Guardar registro</string>
     <string name="menu_nuevo">Nuevo registro</string>
 </resources>
