@@ -14,8 +14,9 @@
     <string name="hint_tipo">Seleccione un tipo:</string>
 
 
-
-
     <string name="btn_guarda">Guardar registro</string>
     <string name="menu_nuevo">Nuevo registro</string>
+    <string name="menu_filtro">Filtros</string>
+    <string name="menu_excel">Exportar Excel</string>
+    <string name="hint_filtro">Seleccione un filtro:</string>
 </resources>

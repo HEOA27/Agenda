@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,7 +35,7 @@ public class NuevoActivity extends AppCompatActivity {
     Button btnGuarda;
     ImageButton btnCalendario;
     private int dia,mes,ano,edad;
-
+    private String sexo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,6 @@ public class NuevoActivity extends AppCompatActivity {
         rbMasculino=findViewById(R.id.rbMasculino);
         txtNota=findViewById(R.id.txtNota);
 
-
         btnGuarda = findViewById(R.id.btnGuarda);
         btnCalendario=findViewById(R.id.btnCalendario);
 
@@ -66,7 +66,13 @@ public class NuevoActivity extends AppCompatActivity {
                 if(!txtNombre.getText().toString().equals("") && !txtTelefono.getText().toString().equals("")) {
 
                     DbContactos dbContactos = new DbContactos(NuevoActivity.this);
-                    long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtTelefono.getText().toString(), txtCorreoElectronico.getText().toString(),txtDireccion.getText().toString());
+
+                    if(rbFemenino.isChecked()){
+                        sexo="Femenino";
+                    }else {
+                        sexo="Masculino";
+                    }
+                    long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtTelefono.getText().toString(), txtCorreoElectronico.getText().toString(),txtDireccion.getText().toString(),sexo,txtFechaNacimiento.getText().toString(),cbxGrupo.getSelectedItem().toString(),cbxTipo.getSelectedItem().toString(),txtNota.getText().toString(),txtFechaRegistro.getText().toString());
 
                     if (id > 0) {
                         Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
@@ -89,7 +95,7 @@ public class NuevoActivity extends AppCompatActivity {
                 dia=c.get(Calendar.DAY_OF_MONTH);
                 mes=c.get(Calendar.MONTH);
                 ano=c.get(Calendar.YEAR);
-                txtFechaRegistro.setText("Fecha de registro: "+ dia + "/"+(mes+1)+"/"+ano);
+                txtFechaRegistro.setText(dia + "/"+(mes+1)+"/"+ano);
                     DatePickerDialog datePickerDialog=new DatePickerDialog(NuevoActivity.this,new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -128,5 +134,12 @@ public class NuevoActivity extends AppCompatActivity {
         txtTelefono.setText("");
         txtCorreoElectronico.setText("");
         txtDireccion.setText("");
+        rbFemenino.setChecked(false);
+        rbMasculino.setChecked(false);
+        txtFechaNacimiento.setText("");
+        txtNota.setText("");
+        txtFechaRegistro.setText("");
+        txtViewEdad.setText("");
+
     }
 }

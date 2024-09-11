@@ -68,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             case R.id.menuNuevo:
                 nuevoRegistro();
                 return true;
+            case R.id.menuFiltro:
+                filtroRegistro();
+                return true;
+            case R.id.menuExcel:
+                exportar();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,6 +83,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void nuevoRegistro(){
         Intent intent = new Intent(this, NuevoActivity.class);
         startActivity(intent);
+    }
+    private void filtroRegistro(){
+        Intent intentFiltro=new Intent(this,FiltroActivity.class);
+        startActivity(intentFiltro);
+    }
+    private void exportar(){
+       /* Intent intentFiltro=new Intent(this,FiltroActivity.class);
+        startActivity(intentFiltro);*/
     }
 
     @Override

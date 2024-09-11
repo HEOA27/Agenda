@@ -20,7 +20,7 @@ public class DbContactos extends DbHelper {
         this.context = context;
     }
 
-    public long insertarContacto(String nombre, String telefono, String correo_electronico, String direccion) {
+    public long insertarContacto(String nombre, String telefono, String correo_electronico, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
 
         long id = 0;
 
@@ -33,6 +33,12 @@ public class DbContactos extends DbHelper {
             values.put("telefono", telefono);
             values.put("correo_electronico", correo_electronico);
             values.put("direccion", direccion);
+            values.put("sexo", sexo);
+            values.put("fecha_nacimiento", fecha_nacimiento);
+            values.put("grupo", grupo);
+            values.put("tipo", tipo);
+            values.put("nota", nota);
+            values.put("fecha_registro", fecha_registro);
             id = db.insert(TABLE_CONTACTOS, null, values);
         } catch (Exception ex) {
             ex.toString();
@@ -85,6 +91,12 @@ public class DbContactos extends DbHelper {
             contacto.setTelefono(cursorContactos.getString(2));
             contacto.setCorreo_electornico(cursorContactos.getString(3));
             contacto.setDireccion(cursorContactos.getString(4));
+            contacto.setSexo(cursorContactos.getString(5));
+            contacto.setFecha_nacimiento(cursorContactos.getString(6));
+            contacto.setGrupo(cursorContactos.getString(7));
+            contacto.setTipo(cursorContactos.getString(8));
+            contacto.setNota(cursorContactos.getString(9));
+            contacto.setFecha_registro(cursorContactos.getString(10));
         }
 
         cursorContactos.close();
@@ -92,7 +104,7 @@ public class DbContactos extends DbHelper {
         return contacto;
     }
 
-    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico, String direccion) {
+    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
 
         boolean correcto = false;
 
@@ -101,7 +113,7 @@ public class DbContactos extends DbHelper {
 
         try {
             //db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
-            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "',direccion = '" + direccion + "' WHERE id='" + id + "' ");
+            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "',direccion = '" + direccion + "',sexo='"+sexo+"',fecha_nacimiento='"+fecha_nacimiento+"', grupo='"+grupo+"',tipo='"+tipo+"',nota='"+nota+"',fecha_registro='"+fecha_registro+"' WHERE id='" + id + "' ");
             correcto = true;
         } catch (Exception ex) {
             ex.toString();
@@ -132,4 +144,37 @@ public class DbContactos extends DbHelper {
 
         return correcto;
     }
+
+    public ArrayList<Contactos> mostrarContactosFiltros() {
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Contactos> listaContactos = new ArrayList<>();
+        Contactos contacto;
+        Cursor cursorContactos;
+
+
+        cursorContactos = db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " ORDER BY nombre ASC", null);
+
+        if (cursorContactos.moveToFirst()) {
+            do {
+                contacto = new Contactos();
+                contacto.setId(cursorContactos.getInt(0));
+                contacto.setNombre(cursorContactos.getString(1));
+                contacto.setSexo(cursorContactos.getString(5));
+                contacto.setFecha_nacimiento(cursorContactos.getString(6));
+                contacto.setGrupo(cursorContactos.getString(7));
+                contacto.setTipo(cursorContactos.getString(8));
+
+                listaContactos.add(contacto);
+            } while (cursorContactos.moveToNext());
+        }
+
+        cursorContactos.close();
+
+        return listaContactos;
+    }
+
+
 }

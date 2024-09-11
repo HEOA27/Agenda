@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="strFiltros">
+        <item>Cumpleaños</item>
+        <item>Bautizados</item>
+        <item>No Bautizados</item>
+        <item>Jóvenes</item>
+        <item>Mujeres(Grupo)</item>
+        <item>Varones(Grupo)</item>
+        <item>Visitantes</item>
+        <item>Niños</item>
+        <item>Adolescentes</item>
+        <item>Adultos</item>
+        <item>Asistencias Frecuente</item>
+        <item>Mujeres</item>
+        <item>Varones</item>
+    </string-array>
+</resources>

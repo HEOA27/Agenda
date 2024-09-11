@@ -5,4 +5,10 @@
     <item
     android:id="@+id/menuNuevo"
     android:title="@string/menu_nuevo" />
+    <item
+        android:id="@+id/menuFiltro"
+        android:title="@string/menu_filtro" />
+    <item
+        android:id="@+id/menuExcel"
+        android:title="@string/menu_excel" />
 </menu>
