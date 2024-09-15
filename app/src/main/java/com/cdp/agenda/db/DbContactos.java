@@ -4,11 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.cdp.agenda.MainActivity;
 import com.cdp.agenda.entidades.Contactos;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class DbContactos extends DbHelper {
@@ -174,6 +179,95 @@ public class DbContactos extends DbHelper {
         cursorContactos.close();
 
         return listaContactos;
+    }
+
+    public boolean exportarCSV() {
+        boolean bandera=false;
+        File carpeta = new File(Environment.getExternalStorageDirectory() + "/ExportarSQLiteCSV");
+        String archivoAgenda = carpeta.toString() + "/" + "Contactos.csv";
+
+        boolean isCreate = false;
+        if(!carpeta.exists()) {
+            isCreate = carpeta.mkdir();
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(archivoAgenda);
+
+            DbHelper dbHelper = new DbHelper(context);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            //DbHelper admin = new DbHelper(MainActivity.this, "agenda.db", null, 1);
+
+            //DbHelper admin=new DbHelper(MainActivity.this);
+
+            //SQLiteDatabase db = admin.getWritableDatabase();
+           // cursorContactos = db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " ORDER BY nombre ASC", null);
+
+
+            //Cursor fila = db.rawQuery("select * from TABLE_CONTACTOS", null);
+            Cursor fila=db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " ORDER BY nombre ASC", null);
+
+            if(fila != null && fila.getCount() != 0) {
+                fila.moveToFirst();
+                fileWriter.append("ID");
+                fileWriter.append(",");
+                fileWriter.append("Nombre");
+                fileWriter.append(",");
+                fileWriter.append("Telefono");
+                fileWriter.append(",");
+                fileWriter.append("Correo electronico");
+                fileWriter.append(",");
+                fileWriter.append("Direccion");
+                fileWriter.append(",");
+                fileWriter.append("Sexo");
+                fileWriter.append(",");
+                fileWriter.append("Fecha nacimiento");
+                fileWriter.append(",");
+                fileWriter.append("Grupo");
+                fileWriter.append(",");
+                fileWriter.append("Tipo");
+                fileWriter.append(",");
+                fileWriter.append("Nota");
+                fileWriter.append(",");
+                fileWriter.append("Fecha registro");
+                fileWriter.append("\n");
+                do {
+                    fileWriter.append(fila.getString(0));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(1));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(2));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(3));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(4));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(5));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(6));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(7));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(8));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(9));
+                    fileWriter.append(",");
+                    fileWriter.append(fila.getString(10));
+                    fileWriter.append("\n");
+
+                } while(fila.moveToNext());
+            } else {
+               // Toast.makeText(MainActivity.this, "No hay registros.", Toast.LENGTH_LONG).show();
+                bandera=false;
+            }
+
+            db.close();
+            fileWriter.close();
+            //Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();
+            bandera=true;
+        } catch (Exception e) { }
+        return bandera;
     }
 
 

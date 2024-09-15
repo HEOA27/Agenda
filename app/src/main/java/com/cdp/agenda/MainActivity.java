@@ -1,12 +1,17 @@
 package com.cdp.agenda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +26,8 @@ import com.cdp.agenda.db.DbHelper;
 import com.cdp.agenda.entidades.Contactos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -91,6 +98,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void exportar(){
        /* Intent intentFiltro=new Intent(this,FiltroActivity.class);
         startActivity(intentFiltro);*/
+        boolean bandera;
+        pedirPermisos();
+        DbContactos dbContactos = new DbContactos(MainActivity.this);
+        bandera=dbContactos.exportarCSV();
+        if(bandera){
+            Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(MainActivity.this, "No hay registros.", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -103,4 +120,18 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         adapter.filtrado(s);
         return false;
     }
+    public void pedirPermisos() {
+        // PERMISOS PARA ANDROID 6 O SUPERIOR
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(
+                    MainActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    0
+            );
+
+        }
+    }
+
 }
