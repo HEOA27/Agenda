@@ -1,5 +1,6 @@
 package com.cdp.agenda.adaptadores;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,10 @@ import java.util.Date;
 public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFiltroCumpleanosAdapter.ContactoViewHolder>{
     ArrayList<Contactos> listaContactos;
     ArrayList<Contactos> listaOriginal;
-    int mes;
+    int mes,bandera;
+    public String[] mColors = {"#3F51B5","#FF9800","#009688","#673AB7"};
+
+
 
     public ListaFiltroCumpleanosAdapter(ArrayList<Contactos> listaContactos) {
         this.listaContactos = listaContactos;
@@ -37,10 +41,14 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
     @Override
     public void onBindViewHolder(@NonNull ListaFiltroCumpleanosAdapter.ContactoViewHolder holder, int position) {
         holder.textViewIzq.setText(listaContactos.get(position).getNombre());
+        if(bandera==1){
+            holder.textViewDer.setBackgroundColor(Color.parseColor(mColors[position % 4]));
+        }
         holder.textViewDer.setText(listaContactos.get(position).getFecha_nacimiento());
     }
 
     public void filtroCumpleanos(final int position) throws ParseException {
+        bandera=0;
         if (position != 0) {
             listaContactos.clear();
             listaContactos.addAll(listaOriginal);
@@ -61,7 +69,9 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
 
                     if (mesActual==mes) {
                         listaContactos.add(contactos);
+                        bandera=1;
                     }
+
                 }
             }
 

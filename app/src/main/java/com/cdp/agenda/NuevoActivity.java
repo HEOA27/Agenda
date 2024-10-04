@@ -1,8 +1,13 @@
 package com.cdp.agenda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -36,6 +41,10 @@ public class NuevoActivity extends AppCompatActivity {
     ImageButton btnCalendario;
     private int dia,mes,ano,edad;
     private String sexo;
+
+    private String channelID="chanelID";
+    private String channelName="chanelName";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,12 +131,39 @@ public class NuevoActivity extends AppCompatActivity {
                 if(diaNacimiento>diaActual){
                     edad=edad-1;
                 }
-                //if(diaNacimiento==diaActual){
+                if(diaNacimiento==diaActual){
+                    //Toast.makeText(this,"Felicidades es tu cumpleaños",Toast.LENGTH_LONG).show();
                     //Felicidades el dia de hoy es su cumpleaños
-               // }
+                   // createNotificationChannel();
+                  /*  NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelID)
+                            .setSmallIcon(R.drawable.ic_birthday)
+                            .setContentTitle("Agenda")
+                            .setContentText("Hoy es cumpleaños ...")
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+                    NotificationManagerCompat managerCompat= NotificationManagerCompat.from(getApplicationContext());
+                    managerCompat.notify(1,builder.build());*/
+                }
             }
         }
         return edad;
+    }
+
+
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //CharSequence name = getString(R.string.channelName);
+            //String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+           // channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this.
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
     private void limpiar() {
         txtNombre.setText("");

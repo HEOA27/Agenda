@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Agenda</string>
-    <string name="hint_nombre">Nombre:</string>
-    <string name="hint_telefono">Telefono:</string>
+    <string name="hint_nombre">Nombre:*</string>
+    <string name="hint_telefono">Telefono:*</string>
     <string name="hint_correo_electronico">Correo electronico:</string>
     <string name="hint_direccion">Dirección:</string>
     <string name="hint_fecha_nacimiento">Fecha de nacimiento:</string>

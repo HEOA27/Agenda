@@ -1,5 +1,6 @@
 package com.cdp.agenda;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -7,28 +8,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.cdp.agenda.adaptadores.ListaContactosAdapter;
 import com.cdp.agenda.db.DbContactos;
-import com.cdp.agenda.db.DbHelper;
 import com.cdp.agenda.entidades.Contactos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -37,6 +40,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     ArrayList<Contactos> listaArrayContactos;
     FloatingActionButton fabNuevo;
     ListaContactosAdapter adapter;
+    private String channelID="chanelID";
+    private String channelName="chanelName";
+    Contactos contacto;
+
+    private int dia,mes,ano,banderaCumpleanos,diaActual,mesActual,anoActual;
+    String fecha,fechadia,fechames,fechaano;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +71,71 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
 
         txtBuscar.setOnQueryTextListener(this);
+        programarNotificacion();
+
     }
 
+    private void programarNotificacion(){
+        /*Toast.makeText(this,"Reminder Set!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, NotificacionActivity.class);
+        PendingIntent pendingIntent =PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
+        AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+        long timeAtButtonClick = System.currentTimeMillis();
+        long tenSecondsInMillis=1000*10;
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick * tenSecondsInMillis,pendingIntent);*/
+
+
+        banderaCumpleanos=diaCumpleaños();
+        if(banderaCumpleanos>=1){
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.set(Calendar.HOUR_OF_DAY,9);
+            calendar.set(Calendar.MINUTE,20);
+            calendar.set(Calendar.SECOND,30);
+
+            Intent intent=new Intent(getApplicationContext(), Notification_receiver.class);
+            PendingIntent pendingIntent= PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager=(AlarmManager)getSystemService(ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
+
+        }
+
+    }
+    private int diaCumpleaños(){
+        int contador=0;
+        ArrayList<Contactos> listaContactos;
+        DbContactos dbContactos = new DbContactos(MainActivity.this);
+        listaContactos= dbContactos.mostrarContactosFiltros();
+        for(Contactos contactos : listaContactos){
+            if (contactos != null) {
+                if(!contactos.getFecha_nacimiento().equals("")) {
+                    fecha=contactos.getFecha_nacimiento();
+                    int idx1= fecha.indexOf("/");
+                    int idx2=fecha.indexOf("/",idx1+1);
+                    fechadia=fecha.substring(0,idx1);
+                    dia=Integer.parseInt(fechadia);
+                    fechames=fecha.substring(idx1+1,idx2);
+                    mes=Integer.parseInt(fechames);
+                    fechaano=fecha.substring(idx2+1);
+                    ano=Integer.parseInt(fechaano);
+
+                    TimeZone timeZone = TimeZone.getTimeZone("GMT-5");
+                    final Calendar c=Calendar.getInstance(timeZone);
+                    diaActual=c.get(Calendar.DAY_OF_MONTH);
+                    mesActual=c.get(Calendar.MONTH);
+                    mesActual+=1;
+                    anoActual=c.get(Calendar.YEAR);
+
+                    if((dia==diaActual)&&(mes==mesActual)){
+                        contador++;
+                    }
+
+                }
+            }
+        }
+
+        return contador;
+    }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_principal, menu);
@@ -76,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 nuevoRegistro();
                 return true;
             case R.id.menuFiltro:
-                filtroRegistro();
+                filtroRegistro()  ;
                 return true;
             case R.id.menuExcel:
-                exportar();
+                //exportar();
+                mensajeExportar();
                 return true;
 
             default:
@@ -96,11 +169,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         startActivity(intentFiltro);
     }
     private void exportar(){
-       /* Intent intentFiltro=new Intent(this,FiltroActivity.class);
-        startActivity(intentFiltro);*/
         boolean bandera;
         pedirPermisos();
         DbContactos dbContactos = new DbContactos(MainActivity.this);
+        dbContactos.exportarCSV();
         bandera=dbContactos.exportarCSV();
         if(bandera){
             Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();
@@ -109,6 +181,26 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
 
     }
+
+    private void mensajeExportar(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("¿Desea exportar a un archivo Excel?")
+                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        exportar();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
+    }
+
+
 
     @Override
     public boolean onQueryTextSubmit(String s) {

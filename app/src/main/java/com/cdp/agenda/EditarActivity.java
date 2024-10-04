@@ -217,14 +217,6 @@ public class EditarActivity extends AppCompatActivity {
             ArrayAdapter<String>adapterGrupo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, listWithoutDuplicates);
             cbxGrupo.setAdapter(adapterGrupo);
 
-            /*String []opcionesTipo={contacto.getTipo()};
-            List<String> listWithDuplicatesT = new ArrayList<>(Arrays.asList(opcionesTipo));
-            Set<String> setT = new LinkedHashSet<>(listWithDuplicatesT);
-            List<String> listWithoutDuplicatesT = new ArrayList<>(setT);
-            ArrayAdapter<String> adapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, listWithoutDuplicatesT);
-            adapterTipo.add(contacto.getTipo());*/
-            //cbxTipo.setAdapter(adapterTipo);
-            //String []opcionesTipo={contacto.getTipo(),"Asistencia frecuente","Bautizado","No Bautizado","Visitante"};
             ArrayList<String>listaTipo=new ArrayList<String>();
             listaTipo.add(contacto.getTipo());
             listaTipo.add("Asistencia frecuente");

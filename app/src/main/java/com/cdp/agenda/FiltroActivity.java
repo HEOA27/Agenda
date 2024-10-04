@@ -48,25 +48,33 @@ public class FiltroActivity extends AppCompatActivity {
         Locale idioma = Locale.getDefault();
         String nombreMes = (new SimpleDateFormat("MMMM", idioma)).format(todayDate);
 
+        listaFiltro.setLayoutManager(new LinearLayoutManager(FiltroActivity.this));
+        DbContactos dbContactos = new DbContactos(FiltroActivity.this);
+        adapter = new ListaFiltroCumpleanosAdapter(dbContactos.mostrarContactosFiltros());
+        adapterTipo = new ListaFiltroTiposAdapter(dbContactos.mostrarContactosFiltros());
+        adapterGrupo = new ListaFiltroGruposAdapter(dbContactos.mostrarContactosFiltros());
+        try {
+            adapter.filtroCumpleanos(0);
+            listaFiltro.setAdapter(adapter);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         cbxFiltro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = (String) cbxFiltro.getItemAtPosition(position);
                 //viewSeleccionado.setText(selected + position);
-                listaFiltro.setLayoutManager(new LinearLayoutManager(FiltroActivity.this));
-                DbContactos dbContactos = new DbContactos(FiltroActivity.this);
-                adapter = new ListaFiltroCumpleanosAdapter(dbContactos.mostrarContactosFiltros());
-                adapterTipo = new ListaFiltroTiposAdapter(dbContactos.mostrarContactosFiltros());
-                adapterGrupo = new ListaFiltroGruposAdapter(dbContactos.mostrarContactosFiltros());
 
                 switch (position) {
                     case 0:
                         //Cumpleaños
                         viewSeleccionado.setText(nombreMes);
                         try {
+
                             adapter.filtroCumpleanos(position);
                             listaFiltro.setAdapter(adapter);
+
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }

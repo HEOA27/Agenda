@@ -196,19 +196,11 @@ public class DbContactos extends DbHelper {
 
             DbHelper dbHelper = new DbHelper(context);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            //DbHelper admin = new DbHelper(MainActivity.this, "agenda.db", null, 1);
-
-            //DbHelper admin=new DbHelper(MainActivity.this);
-
-            //SQLiteDatabase db = admin.getWritableDatabase();
-           // cursorContactos = db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " ORDER BY nombre ASC", null);
-
-
             //Cursor fila = db.rawQuery("select * from TABLE_CONTACTOS", null);
             Cursor fila=db.rawQuery("SELECT * FROM " + TABLE_CONTACTOS + " ORDER BY nombre ASC", null);
 
             if(fila != null && fila.getCount() != 0) {
+                bandera=true;
                 fila.moveToFirst();
                 fileWriter.append("ID");
                 fileWriter.append(",");
@@ -265,7 +257,7 @@ public class DbContactos extends DbHelper {
             db.close();
             fileWriter.close();
             //Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();
-            bandera=true;
+
         } catch (Exception e) { }
         return bandera;
     }

@@ -154,14 +154,7 @@ public class VerActivity extends AppCompatActivity {
 
         String []opcionesGrupo={contacto.getGrupo()};
 
-        // lista de entrada con duplicados
-        //List<String> listWithDuplicates = new ArrayList<>(Arrays.asList(opcionesGrupo));
 
-        // construye un conjunto a partir de elementos de la lista
-        //Set<String> set = new LinkedHashSet<>(listWithDuplicates);
-
-        // construir una nueva lista a partir de un conjunto e imprimirla
-        //List<String> listWithoutDuplicates = new ArrayList<>(set);
 
         ArrayAdapter<String> adapterGrupo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opcionesGrupo);
         cbxGrupo.setAdapter(adapterGrupo);
@@ -180,8 +173,6 @@ public class VerActivity extends AppCompatActivity {
         txtTelefono.setInputType(InputType.TYPE_NULL);
         txtCorreo.setInputType(InputType.TYPE_NULL);
         txtDireccion.setInputType(InputType.TYPE_NULL);
-        /*rbMasculino.setInputType(InputType.TYPE_NULL);
-        rbFemenino.setInputType(InputType.TYPE_NULL);*/
         rbMasculino.setEnabled(false);
         rbFemenino.setEnabled(false);
         txtFechaNacimiento.setInputType(InputType.TYPE_NULL);
