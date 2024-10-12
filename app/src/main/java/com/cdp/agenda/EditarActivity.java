@@ -52,6 +52,8 @@ public class EditarActivity extends AppCompatActivity {
     Contactos contacto;
     int id = 0;
 
+    int diaAc,mesAc,anoAc;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +145,16 @@ public class EditarActivity extends AppCompatActivity {
                     mes=c.get(Calendar.MONTH);
                     ano=c.get(Calendar.YEAR);
                     txtFechaRegistro.setText(dia + "/"+(mes+1)+"/"+ano);
+
+                    fecha=contacto.getFecha_nacimiento();
+                    int idx1= fecha.indexOf("/");
+                    int idx2=fecha.indexOf("/",idx1+1);
+                    String fecha_dia=fecha.substring(0,idx1);
+                    dia=Integer.parseInt(fecha_dia);
+                    String fecha_mes=fecha.substring(idx1+1,idx2);
+                    mes=Integer.parseInt(fecha_mes);
+                    String fecha_ano=fecha.substring(idx2+1);
+                    ano=Integer.parseInt(fecha_ano);
                     DatePickerDialog datePickerDialog=new DatePickerDialog(EditarActivity.this,new DatePickerDialog.OnDateSetListener(){
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -152,7 +164,7 @@ public class EditarActivity extends AppCompatActivity {
 
                         }
                     }
-                            ,dia,mes,ano);
+                            ,ano,mes-1,dia);
                     datePickerDialog.show();
 
                 }

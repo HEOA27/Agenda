@@ -1,5 +1,7 @@
 package com.cdp.agenda.adaptadores;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdp.agenda.R;
+import com.cdp.agenda.VerActivity;
 import com.cdp.agenda.entidades.Contactos;
 
 import java.text.ParseException;
@@ -48,7 +51,7 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
     public int obtenerContador(){
         return cdor;
     }
-    public void filtroJovenes(final int position) throws ParseException {
+    public int filtroJovenes(final int position) throws ParseException {
         contador=0;
         if (position != 3) {
             listaContactos.clear();
@@ -61,13 +64,14 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Jóvenes")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
-    public void filtroMujeres(final int position) throws ParseException {
+    public int filtroMujeres(final int position) throws ParseException {
         contador=0;
         if (position != 4) {
             listaContactos.clear();
@@ -80,13 +84,14 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Mujeres")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
-    public void filtroVarones(final int position) throws ParseException {
+    public int filtroVarones(final int position) throws ParseException {
         contador=0;
         if (position != 5) {
             listaContactos.clear();
@@ -99,13 +104,14 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Varones")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
-    public void filtroNiños(final int position) throws ParseException {
+    public int filtroNiños(final int position) throws ParseException {
         contador=0;
         if (position != 7) {
             listaContactos.clear();
@@ -118,13 +124,14 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Iglesia Infantil")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
-    public void filtroAdolescentes(final int position) throws ParseException {
+    public int filtroAdolescentes(final int position) throws ParseException {
         contador=0;
         if (position != 8) {
             listaContactos.clear();
@@ -137,13 +144,14 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Adolescentes")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
-    public void filtroAdultos(final int position) throws ParseException {
+    public int filtroAdultos(final int position) throws ParseException {
         contador=0;
         if (position != 9) {
             listaContactos.clear();
@@ -156,14 +164,15 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Mujeres")||grupo.equals("Varones")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
 
-    public void filtroMujer(final int position) throws ParseException {
+    public int filtroMujer(final int position) throws ParseException {
         contador=0;
         if (position != 11) {
             listaContactos.clear();
@@ -176,14 +185,15 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (sexo.equals("Femenino")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
 
-    public void filtroHombre(final int position) throws ParseException {
+    public int filtroHombre(final int position) throws ParseException {
         contador=0;
         if (position != 12) {
             listaContactos.clear();
@@ -196,11 +206,12 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (sexo.equals("Masculino")) {
                     listaContactos.add(contactos);
                     contador++;
-                    recibirContador(contador);
+                    //recibirContador(contador);
                 }
             }
         }
         notifyDataSetChanged();
+        return contador;
     }
     public class ContactoViewHolder extends RecyclerView.ViewHolder {
         TextView textViewIzq, textViewDer;
@@ -208,6 +219,17 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
             super(itemView);
             textViewIzq = itemView.findViewById(R.id.textViewIzq);
             textViewDer = itemView.findViewById(R.id.textViewDer);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent=new Intent(context, VerActivity.class);
+                    intent.putExtra("ID",listaContactos.get(getAdapterPosition()).getId());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

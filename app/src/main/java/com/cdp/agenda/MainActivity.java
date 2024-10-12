@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         boolean bandera;
         pedirPermisos();
         DbContactos dbContactos = new DbContactos(MainActivity.this);
-        dbContactos.exportarCSV();
+        //dbContactos.exportarCSV();
         bandera=dbContactos.exportarCSV();
         if(bandera){
             Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();

@@ -24,6 +24,7 @@ public class FiltroActivity extends AppCompatActivity {
     TextView viewFecha,viewSeleccionado;
     Spinner cbxFiltro;
     private RecyclerView listaFiltro;
+    int count=0;
    ListaFiltroCumpleanosAdapter adapter;
    ListaFiltroTiposAdapter adapterTipo;
    ListaFiltroGruposAdapter adapterGrupo;
@@ -83,10 +84,11 @@ public class FiltroActivity extends AppCompatActivity {
                     case 1:
                         //Bautizados
                         try {
-                            adapterTipo.filtroBautizado(position);
+                           // count=0;
+                            count=adapterTipo.filtroBautizado(position);
                             listaFiltro.setAdapter(adapterTipo);
-                            //viewSeleccionado.setText("Total de "+selected+": "+ adapterTipo.obtenerContador());
-                            viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                            ///viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
@@ -94,10 +96,11 @@ public class FiltroActivity extends AppCompatActivity {
                     case 2:
                         //No Bautizados
                         try {
-                            adapterTipo.filtroNoBautizado(position);
+                            //count=0;
+                            count=adapterTipo.filtroNoBautizado(position);
                             listaFiltro.setAdapter(adapterTipo);
-                            //viewSeleccionado.setText("Total de "+selected+": "+ adapterTipo.obtenerContador());
-                            viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
+                            ///viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
@@ -106,9 +109,11 @@ public class FiltroActivity extends AppCompatActivity {
                         //Jóvenes
 
                         try {
-                            adapterGrupo.filtroJovenes(position);
+                          //  count=0;
+                            count=adapterGrupo.filtroJovenes(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
@@ -116,9 +121,11 @@ public class FiltroActivity extends AppCompatActivity {
                     case 4:
                         //Mujeres(Grupo)
                         try {
-                            adapterGrupo.filtroMujeres(position);
+                           // count=0;
+                            count=adapterGrupo.filtroMujeres(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
@@ -126,9 +133,11 @@ public class FiltroActivity extends AppCompatActivity {
                     case 5:
                         //Varones(Grupo)
                         try {
-                            adapterGrupo.filtroVarones(position);
+                           // count=0;
+                            count= adapterGrupo.filtroVarones(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                           ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
@@ -136,63 +145,79 @@ public class FiltroActivity extends AppCompatActivity {
                     case 6:
                         //Visitantes
                         try {
-                            adapterTipo.filtroVisitante(position);
+                            //count=0;
+                            count= adapterTipo.filtroVisitante(position);
                             listaFiltro.setAdapter(adapterTipo);
-                            viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());                        } catch (ParseException e) {
+                           /// viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 7:
                         //Niños
                         try {
-                            adapterGrupo.filtroNiños(position);
+                            count= adapterGrupo.filtroNiños(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());                        } catch (ParseException e) {
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 8:
                         //Adolescentes
                         try {
-                            adapterGrupo.filtroAdolescentes(position);
+                            count= adapterGrupo.filtroAdolescentes(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());                        } catch (ParseException e) {
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 9:
                         //Adultos
                         try {
-                            adapterGrupo.filtroAdultos(position);
+                            count= adapterGrupo.filtroAdultos(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());                        } catch (ParseException e) {
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 10:
                         //Asistencia Frecuente
                         try {
-                            adapterTipo.filtroAsistenciaF(position);
+                            count=0;
+                            count= adapterTipo.filtroAsistenciaF(position);
                             listaFiltro.setAdapter(adapterTipo);
-                            viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());                        } catch (ParseException e) {
+                            //viewSeleccionado.setText("Total: "+ adapterTipo.obtenerContador());
+                            viewSeleccionado.setText("Total: "+count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 11:
                         //Cant.Mujeres
                         try {
-                            adapterGrupo.filtroMujer(position);
+                            count= adapterGrupo.filtroMujer(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());                        } catch (ParseException e) {
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;
                     case 12:
                         //Cant.Hombres
                         try {
-                            adapterGrupo.filtroHombre(position);
+                            count= adapterGrupo.filtroHombre(position);
                             listaFiltro.setAdapter(adapterGrupo);
-                            viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());                        } catch (ParseException e) {
+                            ///viewSeleccionado.setText("Total: "+ adapterGrupo.obtenerContador());
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
                             throw new RuntimeException(e);
                         }
                         break;

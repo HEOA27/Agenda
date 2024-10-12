@@ -1,5 +1,7 @@
 package com.cdp.agenda.adaptadores;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdp.agenda.R;
+import com.cdp.agenda.VerActivity;
 import com.cdp.agenda.entidades.Contactos;
 
 import java.text.ParseException;
@@ -20,9 +23,12 @@ import java.util.Date;
 public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFiltroCumpleanosAdapter.ContactoViewHolder>{
     ArrayList<Contactos> listaContactos;
     ArrayList<Contactos> listaOriginal;
-    int mes,bandera;
-    public String[] mColors = {"#3F51B5","#FF9800","#009688","#673AB7"};
+    int mes,dia;
 
+    boolean bandera;
+    public String mColors = "#3F51B5";
+
+    int [] indicesCumpleanos;
 
 
     public ListaFiltroCumpleanosAdapter(ArrayList<Contactos> listaContactos) {
@@ -41,14 +47,18 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
     @Override
     public void onBindViewHolder(@NonNull ListaFiltroCumpleanosAdapter.ContactoViewHolder holder, int position) {
         holder.textViewIzq.setText(listaContactos.get(position).getNombre());
-        if(bandera==1){
-            holder.textViewDer.setBackgroundColor(Color.parseColor(mColors[position % 4]));
-        }
+        /*if(bandera==true){
+           // holder.textViewDer.setBackgroundColor(Color.parseColor(mColors[position % 4]));
+            holder.textViewDer.setTextColor(Color.parseColor(mColors));
+        }*/
+       /* if(diaActual == dia && mesActual==mes){
+            holder.textViewDer.setTextColor(Color.parseColor(mColors));
+        }*/
         holder.textViewDer.setText(listaContactos.get(position).getFecha_nacimiento());
     }
 
     public void filtroCumpleanos(final int position) throws ParseException {
-        bandera=0;
+        bandera=false;
         if (position != 0) {
             listaContactos.clear();
             listaContactos.addAll(listaOriginal);
@@ -56,9 +66,15 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
             listaContactos.clear();
             Date todayDate = new Date();
             SimpleDateFormat fmes = new SimpleDateFormat("MM");
+            SimpleDateFormat fdia = new SimpleDateFormat("dd");
             String fMes = fmes.format(todayDate);
             int mesActual=Integer.parseInt(fMes);
-            String fecha,fechames;
+            mesActual=Integer.parseInt(fMes);
+            String fDia = fdia.format(todayDate);
+            int diaActual=Integer.parseInt(fDia);
+            diaActual=Integer.parseInt(fDia);
+
+            String fecha,fechames,fechadia;
             int idx1,idx2;
                 for (Contactos contactos : listaOriginal) {
                     fecha= contactos.getFecha_nacimiento();
@@ -66,17 +82,24 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
                     idx2=fecha.indexOf("/",idx1+1);
                     fechames=fecha.substring(idx1+1,idx2);
                     mes=Integer.parseInt(fechames);
-
+                    fechadia=fecha.substring(0,idx1);
+                    dia=Integer.parseInt(fechadia);
                     if (mesActual==mes) {
                         listaContactos.add(contactos);
-                        bandera=1;
+                       /* if(diaActual == dia && mesActual==mes){
+                            bandera=true;
+                        }else{
+                            bandera=false;
+                        }*/
                     }
 
                 }
+
             }
 
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return listaContactos.size();
@@ -90,6 +113,16 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
             super(itemView);
             textViewIzq = itemView.findViewById(R.id.textViewIzq);
             textViewDer = itemView.findViewById(R.id.textViewDer);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    Context context =view.getContext();
+                    Intent intent = new Intent(context, VerActivity.class);
+                    intent.putExtra("ID",listaContactos.get(getAdapterPosition()).getId());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

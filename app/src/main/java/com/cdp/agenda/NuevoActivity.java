@@ -114,7 +114,7 @@ public class NuevoActivity extends AppCompatActivity {
 
                     }
                 }
-                ,dia,mes,ano);
+                ,ano,mes,dia);
                 datePickerDialog.show();
 
                 }
