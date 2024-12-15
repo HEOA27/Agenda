@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".VerActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_nombre"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/txtNombre"
@@ -26,14 +30,14 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:labelFor="@+id/viewNombre"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txtSexo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_sexo"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -46,14 +50,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Femenino"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/rbMasculino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Masculino"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
         </RadioGroup>
 
         <TextView
@@ -61,23 +65,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_telefono"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/txtTelefono"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:labelFor="@+id/viewTelefono"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtTelefono"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:labelFor="@+id/viewTelefono"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/btnLlamar"
+                android:layout_width="119dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#3F51B5"
+                app:srcCompat="@android:drawable/ic_menu_call" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/viewDireccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_direccion"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/txtDireccion"
@@ -86,14 +104,14 @@
             android:ems="10"
             android:inputType="text|textMultiLine"
             android:lines="2"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/viewFechaNac"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_fecha_nacimiento"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,8 +120,9 @@
 
             <ImageButton
                 android:id="@+id/btnCalendario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="#3F51B5"
                 android:src="@android:drawable/ic_menu_my_calendar" />
 
             <EditText
@@ -112,20 +131,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/viewEdad"
                 android:layout_width="2dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/hint_edad" />
+                android:text="@string/hint_edad"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/txtViewEdad"
-                android:layout_width="91dp"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -134,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hint_correo_electronico"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/txtCorreoElectronico"
@@ -143,7 +165,7 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:labelFor="@+id/viewCorreo"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,14 +178,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hint_grupo"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <Spinner
                 android:id="@+id/cbxGrupo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:entries="@array/strGrupos" />
+                android:entries="@array/strGrupos"
+                android:textSize="12sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,7 +199,7 @@
                 android:layout_width="187dp"
                 android:layout_height="wrap_content"
                 android:text="@string/hint_tipo"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <Spinner
                 android:id="@+id/cbxTipo"
@@ -191,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/hint_nota"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <EditText
             android:id="@+id/txtNota"
@@ -200,7 +223,7 @@
             android:ems="10"
             android:inputType="text|textMultiLine"
             android:lines="4"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -211,17 +234,19 @@
                 android:id="@+id/viewRegistro"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/hint_fecha_registro" />
+                android:text="@string/hint_fecha_registro"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/txtFechaRegistro"
                 android:layout_width="288dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="123dp"
             android:gravity="right"
             android:orientation="horizontal">
 
@@ -244,7 +269,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:clickable="true"
-                    android:src="@drawable/ic_edit" />
+                    android:src="@drawable/ic_edit"
+                    app:backgroundTint="#3F51B5" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabEliminar"
@@ -252,7 +278,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:clickable="true"
-                    android:src="@drawable/ic_delete" />
+                    android:src="@drawable/ic_delete"
+                    app:backgroundTint="#3F51B5" />
             </LinearLayout>
 
         </LinearLayout>
@@ -274,4 +301,5 @@
             app:srcCompat="@drawable/ic_edit" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>-->
+    </ScrollView>
 </LinearLayout>

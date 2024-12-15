@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.text.InputType;
@@ -22,14 +23,8 @@ import com.cdp.agenda.entidades.Contactos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+
 
 public class VerActivity extends AppCompatActivity {
 
@@ -38,9 +33,9 @@ public class VerActivity extends AppCompatActivity {
     RadioButton rbFemenino, rbMasculino;
     TextView txtViewEdad,txtFechaRegistro;
     Button btnGuarda;
-    ImageButton btnCalendario;
+    ImageButton btnCalendario, btnLlamar;
     int dia,mes,ano,edad;
-    private String sexo,fecha,fechadia,fechames,fechaano;
+    private String fecha,fechadia,fechames,fechaano;
     FloatingActionButton fabEditar, fabEliminar;
 
     Contactos contacto;
@@ -70,6 +65,7 @@ public class VerActivity extends AppCompatActivity {
         btnGuarda.setVisibility(View.INVISIBLE);
         btnCalendario=findViewById(R.id.btnCalendario);
         btnCalendario.setVisibility(View.INVISIBLE);
+        btnLlamar =findViewById(R.id.btnLlamar);
 
         if(savedInstanceState == null){
             Bundle extras = getIntent().getExtras();
@@ -118,7 +114,18 @@ public class VerActivity extends AppCompatActivity {
                         }).show();
             }
         });
+
+        btnLlamar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+txtTelefono.getText().toString() ));
+                startActivity(intent);
+            }
+        });
+
     }
+
 
     private void obtenerDatos() {
 
@@ -148,7 +155,7 @@ public class VerActivity extends AppCompatActivity {
         fechaano=fecha.substring(idx2+1);
         ano=Integer.parseInt(fechaano);
         txtViewEdad.setText(" " + calcularEdad(ano,mes,dia));}
-        //txtViewEdad.setText(fechaano);
+
 
 
 
@@ -201,7 +208,7 @@ public class VerActivity extends AppCompatActivity {
         int diaActual=Integer.parseInt(fDia);
 
 
-        // txtViewEdad.setText(fAno);
+
         edad=anoActual-anoNacimiento;
         if(mesNacimiento>mesActual){
             edad=edad-1;

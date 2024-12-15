@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,19 +39,15 @@ public class EditarActivity extends AppCompatActivity {
     Spinner cbxGrupo,cbxTipo;
     RadioButton rbFemenino, rbMasculino;
     TextView txtViewEdad,txtFechaRegistro;
-    ImageButton btnCalendario;
+    ImageButton btnCalendario,btnLlamar;
     private int dia,mes,ano,edad;
     String sexo,fecha,fechadia,fechames,fechaano;
-    //String []opcionesGrupo;
-    //ArrayAdapter<String> adapterGrupo;
-
     Button btnGuarda;
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
     Contactos contacto;
     int id = 0;
 
-    int diaAc,mesAc,anoAc;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -81,8 +76,9 @@ public class EditarActivity extends AppCompatActivity {
         fabEliminar.setVisibility(View.INVISIBLE);
 
         btnCalendario=findViewById(R.id.btnCalendario);
+        btnLlamar=findViewById(R.id.btnLlamar);
 
-        //btnCalendario.setVisibility(View.INVISIBLE);
+        btnLlamar.setVisibility(View.INVISIBLE);
 
 
         if (savedInstanceState == null) {
@@ -202,20 +198,19 @@ public class EditarActivity extends AppCompatActivity {
                 fechaano=fecha.substring(idx2+1);
                 ano=Integer.parseInt(fechaano);
                 txtViewEdad.setText(" " + calcularEdadRecuperada(ano,mes,dia));}
-            //txtViewEdad.setText(fechaano);
+
 
 
             ArrayList<String>listaGrupo=new ArrayList<String>();
             listaGrupo.add(contacto.getGrupo());
             listaGrupo.add("Adolescentes");
-           // listaGrupo.add("Adultos");
+
             listaGrupo.add("Iglesia Infantil");
             listaGrupo.add("Jóvenes");
             listaGrupo.add("Mujeres");
             listaGrupo.add("Varones");
             String [] arrayDeStringsG = listaGrupo.toArray(new String[listaGrupo.size()]);
 
-            //String []opcionesGrupo={contacto.getGrupo()};
 
             // lista de entrada con duplicados
             List<String> listWithDuplicates = new ArrayList<>(Arrays.asList(arrayDeStringsG));
@@ -241,25 +236,8 @@ public class EditarActivity extends AppCompatActivity {
             List<String> listWithoutDuplicatesT = new ArrayList<>(setT);
             ArrayAdapter<String>adapterT=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listWithoutDuplicatesT);
             cbxTipo.setAdapter(adapterT);
-
-
-
             txtNota.setText(contacto.getNota());
             txtFechaRegistro.setText(contacto.getFecha_registro());
-
-
-
-
-            /*txtNombre.setInputType(InputType.TYPE_NULL);
-            txtTelefono.setInputType(InputType.TYPE_NULL);
-            txtCorreo.setInputType(InputType.TYPE_NULL);
-            txtDireccion.setInputType(InputType.TYPE_NULL);
-            rbMasculino.setInputType(InputType.TYPE_NULL);
-            rbFemenino.setInputType(InputType.TYPE_NULL);
-            txtFechaNacimiento.setInputType(InputType.TYPE_NULL);
-            txtNota.setInputType(InputType.TYPE_NULL);*/
-
-
         }
     }
 
@@ -275,9 +253,6 @@ public class EditarActivity extends AppCompatActivity {
         int anoActual=Integer.parseInt(fAno);
         int mesActual=Integer.parseInt(fMes);
         int diaActual=Integer.parseInt(fDia);
-
-
-        // txtViewEdad.setText(fAno);
         edad=anoActual-anoNacimiento;
         if(mesNacimiento>mesActual){
             edad=edad-1;

@@ -22,8 +22,8 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
     ArrayList<Contactos> listaOriginal;
     String tipo;
 
-    int contador=0;
-    int cdor=0;
+    int contador=0,cdor=0;
+    //int cdor=0;
 
     public ListaFiltroTiposAdapter(ArrayList<Contactos> listaContactos) {
         this.listaContactos = listaContactos;
@@ -62,7 +62,6 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
                 if (tipo.equals("Bautizado")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -70,12 +69,6 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
         return contador;
     }
 
-    public void recibirContador(int cont){
-       cdor=cont;
-    }
-    public int obtenerContador(){
-        return cdor;
-    }
 
     public int filtroNoBautizado(final int position) throws ParseException {
         contador=0;
@@ -90,8 +83,6 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
                 if (tipo.equals("No Bautizado")||tipo.equals("Visitante")||tipo.equals("Asistencia frecuente")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
-
                 }
             }
         }
@@ -112,8 +103,6 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
                 if (tipo.equals("Visitante")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
-
                 }
             }
         }
@@ -133,7 +122,6 @@ public class ListaFiltroTiposAdapter extends RecyclerView.Adapter<ListaFiltroTip
                 if (tipo.equals("Asistencia frecuente")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }

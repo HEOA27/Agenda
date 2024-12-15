@@ -45,12 +45,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
     public int getItemCount() {
         return listaContactos.size();
     }
-    public void recibirContador(int cont){
-        cdor=cont;
-    }
-    public int obtenerContador(){
-        return cdor;
-    }
     public int filtroJovenes(final int position) throws ParseException {
         contador=0;
         if (position != 3) {
@@ -84,7 +78,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Mujeres")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -104,7 +97,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Varones")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -124,7 +116,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Iglesia Infantil")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -144,7 +135,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Adolescentes")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -164,7 +154,6 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
                 if (grupo.equals("Mujeres")||grupo.equals("Varones")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -181,11 +170,10 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
             listaContactos.clear();
 
             for (Contactos contactos : listaOriginal) {
-                sexo= contactos.getSexo();//debe ser global
+                sexo= contactos.getSexo();
                 if (sexo.equals("Femenino")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }
@@ -202,11 +190,10 @@ public class ListaFiltroGruposAdapter extends RecyclerView.Adapter<ListaFiltroGr
             listaContactos.clear();
 
             for (Contactos contactos : listaOriginal) {
-                sexo= contactos.getSexo();//debe ser global
+                sexo= contactos.getSexo();
                 if (sexo.equals("Masculino")) {
                     listaContactos.add(contactos);
                     contador++;
-                    //recibirContador(contador);
                 }
             }
         }

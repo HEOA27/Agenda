@@ -9,16 +9,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.cdp.agenda.MainActivity;
 import com.cdp.agenda.entidades.Contactos;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class DbContactos extends DbHelper {
@@ -198,9 +191,6 @@ public class DbContactos extends DbHelper {
 
         try {
             FileWriter fileWriter = new FileWriter(archivoAgenda);
-
-           // FileWriter fw = new FileWriter(archivoAgenda, Charset.forName("UTF8"));
-
             DbHelper dbHelper = new DbHelper(context);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             //Cursor fila = db.rawQuery("select * from TABLE_CONTACTOS", null);
@@ -257,13 +247,10 @@ public class DbContactos extends DbHelper {
 
                 } while(fila.moveToNext());
             } else {
-               // Toast.makeText(MainActivity.this, "No hay registros.", Toast.LENGTH_LONG).show();
                 bandera=false;
             }
             db.close();
             fileWriter.close();
-            //Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();
-
         } catch (Exception e) { }
         return bandera;
     }

@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         txtBuscar = findViewById(R.id.txtBuscar);
         listaContactos = findViewById(R.id.listaContactos);
         fabNuevo = findViewById(R.id.favNuevo);
@@ -76,15 +80,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private void programarNotificacion(){
-        /*Toast.makeText(this,"Reminder Set!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, NotificacionActivity.class);
-        PendingIntent pendingIntent =PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
-        AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
-        long timeAtButtonClick = System.currentTimeMillis();
-        long tenSecondsInMillis=1000*10;
-        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick * tenSecondsInMillis,pendingIntent);*/
-
-
         banderaCumpleanos=diaCumpleaños();
         if(banderaCumpleanos>=1){
             Calendar calendar = Calendar.getInstance();
@@ -172,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         boolean bandera;
         pedirPermisos();
         DbContactos dbContactos = new DbContactos(MainActivity.this);
-        //dbContactos.exportarCSV();
         bandera=dbContactos.exportarCSV();
         if(bandera){
             Toast.makeText(MainActivity.this, "SE CREO EL ARCHIVO CSV EXITOSAMENTE", Toast.LENGTH_LONG).show();

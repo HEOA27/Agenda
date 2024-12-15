@@ -26,9 +26,6 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
     int mes,dia;
 
     boolean bandera;
-    public String mColors = "#3F51B5";
-
-    int [] indicesCumpleanos;
 
 
     public ListaFiltroCumpleanosAdapter(ArrayList<Contactos> listaContactos) {
@@ -47,13 +44,6 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
     @Override
     public void onBindViewHolder(@NonNull ListaFiltroCumpleanosAdapter.ContactoViewHolder holder, int position) {
         holder.textViewIzq.setText(listaContactos.get(position).getNombre());
-        /*if(bandera==true){
-           // holder.textViewDer.setBackgroundColor(Color.parseColor(mColors[position % 4]));
-            holder.textViewDer.setTextColor(Color.parseColor(mColors));
-        }*/
-       /* if(diaActual == dia && mesActual==mes){
-            holder.textViewDer.setTextColor(Color.parseColor(mColors));
-        }*/
         holder.textViewDer.setText(listaContactos.get(position).getFecha_nacimiento());
     }
 
@@ -68,14 +58,9 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
             SimpleDateFormat fmes = new SimpleDateFormat("MM");
             SimpleDateFormat fdia = new SimpleDateFormat("dd");
             String fMes = fmes.format(todayDate);
-            int mesActual=Integer.parseInt(fMes);
+            int mesActual,idx1,idx2;
             mesActual=Integer.parseInt(fMes);
-            String fDia = fdia.format(todayDate);
-            int diaActual=Integer.parseInt(fDia);
-            diaActual=Integer.parseInt(fDia);
-
             String fecha,fechames,fechadia;
-            int idx1,idx2;
                 for (Contactos contactos : listaOriginal) {
                     fecha= contactos.getFecha_nacimiento();
                     idx1= fecha.indexOf("/");
@@ -86,11 +71,7 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
                     dia=Integer.parseInt(fechadia);
                     if (mesActual==mes) {
                         listaContactos.add(contactos);
-                       /* if(diaActual == dia && mesActual==mes){
-                            bandera=true;
-                        }else{
-                            bandera=false;
-                        }*/
+
                     }
 
                 }
