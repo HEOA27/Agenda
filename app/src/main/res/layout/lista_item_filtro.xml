@@ -10,8 +10,8 @@
 
         <TextView
             android:id="@+id/textViewIzq"
-            android:layout_width="206dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
             android:textColor="#050505"
@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/textViewDer"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#070707"
             android:textSize="16sp" />

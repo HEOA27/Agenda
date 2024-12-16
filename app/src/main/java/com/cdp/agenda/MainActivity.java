@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if(banderaCumpleanos>=1){
             Calendar calendar = Calendar.getInstance();
 
-            calendar.set(Calendar.HOUR_OF_DAY,9);
-            calendar.set(Calendar.MINUTE,20);
+            calendar.set(Calendar.HOUR_OF_DAY,10);
+            calendar.set(Calendar.MINUTE,10);
             calendar.set(Calendar.SECOND,30);
 
             Intent intent=new Intent(getApplicationContext(), Notification_receiver.class);
