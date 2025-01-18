@@ -40,7 +40,7 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
     public void onBindViewHolder(@NonNull ContactoViewHolder holder, int position) {
         holder.viewNombre.setText(listaContactos.get(position).getNombre());
         holder.viewTelefono.setText(listaContactos.get(position).getTelefono());
-        holder.viewCorreo.setText(listaContactos.get(position).getCorreo_electornico());
+        holder.viewMiembroComunion.setText(listaContactos.get(position).getMiembro_plena_comunion());
     }
 
     public void filtrado(final String txtBuscar) {
@@ -73,14 +73,14 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
 
     public class ContactoViewHolder extends RecyclerView.ViewHolder {
 
-        TextView viewNombre, viewTelefono, viewCorreo;
+        TextView viewNombre, viewTelefono, viewMiembroComunion;
 
         public ContactoViewHolder(@NonNull View itemView) {
             super(itemView);
 
             viewNombre = itemView.findViewById(R.id.viewNombre);
             viewTelefono = itemView.findViewById(R.id.viewTelefono);
-            viewCorreo = itemView.findViewById(R.id.viewCorreo);
+            viewMiembroComunion = itemView.findViewById(R.id.viewMiembroComunion);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

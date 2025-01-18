@@ -3,6 +3,7 @@ package com.cdp.agenda;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.cdp.agenda.db.DbContactos;
@@ -31,9 +33,10 @@ public class VerActivity extends AppCompatActivity {
     EditText txtNombre, txtTelefono, txtCorreo, txtDireccion,txtFechaNacimiento,txtNota;
     Spinner cbxGrupo,cbxTipo;
     RadioButton rbFemenino, rbMasculino;
-    TextView txtViewEdad,txtFechaRegistro;
+    TextView txtViewEdad,txtFechaRegistro,txtEsMiembro;
     Button btnGuarda;
     ImageButton btnCalendario, btnLlamar;
+    Switch switchEsMiembro;
     int dia,mes,ano,edad;
     private String fecha,fechadia,fechames,fechaano;
     FloatingActionButton fabEditar, fabEliminar;
@@ -41,6 +44,7 @@ public class VerActivity extends AppCompatActivity {
     Contactos contacto;
     int id = 0;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,8 @@ public class VerActivity extends AppCompatActivity {
 
         txtNombre = findViewById(R.id.txtNombre);
         txtTelefono = findViewById(R.id.txtTelefono);
-        txtCorreo = findViewById(R.id.txtCorreoElectronico);
+        switchEsMiembro = findViewById(R.id.switchEsMiembro);
+        txtEsMiembro=findViewById(R.id.txtEsmiembro);
         txtDireccion=findViewById(R.id.txtDireccion);
         txtFechaNacimiento=findViewById(R.id.txtFechaNacimiento);
         txtFechaRegistro=findViewById(R.id.txtFechaRegistro);
@@ -58,6 +63,7 @@ public class VerActivity extends AppCompatActivity {
         rbFemenino=findViewById(R.id.rbFemenino);
         rbMasculino=findViewById(R.id.rbMasculino);
         txtNota=findViewById(R.id.txtNota);
+
 
         fabEditar = findViewById(R.id.fabEditar);
         fabEliminar = findViewById(R.id.fabEliminar);
@@ -132,7 +138,14 @@ public class VerActivity extends AppCompatActivity {
         if(contacto != null){
             txtNombre.setText(contacto.getNombre());
             txtTelefono.setText(contacto.getTelefono());
-            txtCorreo.setText(contacto.getCorreo_electornico());
+            //txtCorreo.setText(contacto.getCorreo_electornico());
+            if(contacto.getMiembro_plena_comunion().equals("Es miembro")){
+                switchEsMiembro.setChecked(true);
+                txtEsMiembro.setText("Es miembro en plena comunión");
+            }else{
+                switchEsMiembro.setChecked(false);
+                txtEsMiembro.setText("No es miembro en plena comunión");
+            }
             txtDireccion.setText(contacto.getDireccion());
 
         if (contacto.getSexo().equals("Femenino")){
@@ -178,7 +191,8 @@ public class VerActivity extends AppCompatActivity {
 
         txtNombre.setInputType(InputType.TYPE_NULL);
         txtTelefono.setInputType(InputType.TYPE_NULL);
-        txtCorreo.setInputType(InputType.TYPE_NULL);
+        //txtCorreo.setInputType(InputType.TYPE_NULL);
+        switchEsMiembro.setEnabled(false);
         txtDireccion.setInputType(InputType.TYPE_NULL);
         rbMasculino.setEnabled(false);
         rbFemenino.setEnabled(false);

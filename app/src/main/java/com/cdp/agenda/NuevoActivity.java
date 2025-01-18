@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +37,13 @@ public class NuevoActivity extends AppCompatActivity {
     EditText txtNombre, txtTelefono, txtCorreoElectronico, txtDireccion,txtFechaNacimiento,txtNota;
     Spinner cbxGrupo,cbxTipo;
     RadioButton rbFemenino, rbMasculino;
-    TextView txtViewEdad,txtFechaRegistro;
+    TextView txtViewEdad,txtFechaRegistro,txtEsMiembro;
     Button btnGuarda;
     ImageButton btnCalendario;
     private int dia,mes,ano,edad;
-    private String sexo;
+    private String sexo,miembro_plena_comunion;
 
+    Switch switchEsMiembro;
     private String channelID="chanelID";
     private String channelName="chanelName";
 
@@ -52,7 +54,9 @@ public class NuevoActivity extends AppCompatActivity {
 
         txtNombre = findViewById(R.id.txtNombre);
         txtTelefono = findViewById(R.id.txtTelefono);
-        txtCorreoElectronico = findViewById(R.id.txtCorreoElectronico);
+       // txtCorreoElectronico = findViewById(R.id.txtCorreoElectronico);
+        switchEsMiembro = findViewById(R.id.switchEsMiembro);
+        txtEsMiembro=findViewById(R.id.txtEsmiembro);
         txtDireccion = findViewById(R.id.txtDireccion);
         txtFechaNacimiento=findViewById(R.id.txtFechaNacimiento);
         txtFechaRegistro=findViewById(R.id.txtFechaRegistro);
@@ -76,12 +80,18 @@ public class NuevoActivity extends AppCompatActivity {
 
                     DbContactos dbContactos = new DbContactos(NuevoActivity.this);
 
+                    if(switchEsMiembro.isChecked()){
+                        miembro_plena_comunion="Es miembro";
+                    }else{
+                        miembro_plena_comunion="No es miembro";
+                    }
+
                     if(rbFemenino.isChecked()){
                         sexo="Femenino";
                     }else {
                         sexo="Masculino";
                     }
-                    long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtTelefono.getText().toString(), txtCorreoElectronico.getText().toString(),txtDireccion.getText().toString(),sexo,txtFechaNacimiento.getText().toString(),cbxGrupo.getSelectedItem().toString(),cbxTipo.getSelectedItem().toString(),txtNota.getText().toString(),txtFechaRegistro.getText().toString());
+                    long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtTelefono.getText().toString(), miembro_plena_comunion,txtDireccion.getText().toString(),sexo,txtFechaNacimiento.getText().toString(),cbxGrupo.getSelectedItem().toString(),cbxTipo.getSelectedItem().toString(),txtNota.getText().toString(),txtFechaRegistro.getText().toString());
 
                     if (id > 0) {
                         Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
@@ -147,7 +157,8 @@ public class NuevoActivity extends AppCompatActivity {
     private void limpiar() {
         txtNombre.setText("");
         txtTelefono.setText("");
-        txtCorreoElectronico.setText("");
+       // txtCorreoElectronico.setText("");
+        switchEsMiembro.setChecked(false);
         txtDireccion.setText("");
         rbFemenino.setChecked(false);
         rbMasculino.setChecked(false);

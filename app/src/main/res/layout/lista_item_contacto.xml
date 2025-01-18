@@ -53,7 +53,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/viewCorreo"
+                    android:id="@+id/viewMiembroComunion"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"

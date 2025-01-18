@@ -23,7 +23,7 @@ public class DbContactos extends DbHelper {
         this.context = context;
     }
 
-    public long insertarContacto(String nombre, String telefono, String correo_electronico, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
+    public long insertarContacto(String nombre, String telefono, String miembro_plena_comunion, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
 
         long id = 0;
 
@@ -34,7 +34,7 @@ public class DbContactos extends DbHelper {
             ContentValues values = new ContentValues();
             values.put("nombre", nombre);
             values.put("telefono", telefono);
-            values.put("correo_electronico", correo_electronico);
+            values.put("miembro_plena_comunion", miembro_plena_comunion);
             values.put("direccion", direccion);
             values.put("sexo", sexo);
             values.put("fecha_nacimiento", fecha_nacimiento);
@@ -67,7 +67,7 @@ public class DbContactos extends DbHelper {
                 contacto.setId(cursorContactos.getInt(0));
                 contacto.setNombre(cursorContactos.getString(1));
                 contacto.setTelefono(cursorContactos.getString(2));
-                contacto.setCorreo_electornico(cursorContactos.getString(3));
+                contacto.setMiembro_plena_comunion(cursorContactos.getString(3));
                 listaContactos.add(contacto);
             } while (cursorContactos.moveToNext());
         }
@@ -92,7 +92,7 @@ public class DbContactos extends DbHelper {
             contacto.setId(cursorContactos.getInt(0));
             contacto.setNombre(cursorContactos.getString(1));
             contacto.setTelefono(cursorContactos.getString(2));
-            contacto.setCorreo_electornico(cursorContactos.getString(3));
+            contacto.setMiembro_plena_comunion(cursorContactos.getString(3));
             contacto.setDireccion(cursorContactos.getString(4));
             contacto.setSexo(cursorContactos.getString(5));
             contacto.setFecha_nacimiento(cursorContactos.getString(6));
@@ -107,7 +107,7 @@ public class DbContactos extends DbHelper {
         return contacto;
     }
 
-    public boolean editarContacto(int id, String nombre, String telefono, String correo_electronico, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
+    public boolean editarContacto(int id, String nombre, String telefono, String miembro_plena_comunion, String direccion,String sexo,String fecha_nacimiento,String grupo,String tipo,String nota,String fecha_registro) {
 
         boolean correcto = false;
 
@@ -116,7 +116,7 @@ public class DbContactos extends DbHelper {
 
         try {
             //db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "' WHERE id='" + id + "' ");
-            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', correo_electronico = '" + correo_electronico + "',direccion = '" + direccion + "',sexo='"+sexo+"',fecha_nacimiento='"+fecha_nacimiento+"', grupo='"+grupo+"',tipo='"+tipo+"',nota='"+nota+"',fecha_registro='"+fecha_registro+"' WHERE id='" + id + "' ");
+            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '" + nombre + "', telefono = '" + telefono + "', miembro_plena_comunion = '" + miembro_plena_comunion + "',direccion = '" + direccion + "',sexo='"+sexo+"',fecha_nacimiento='"+fecha_nacimiento+"', grupo='"+grupo+"',tipo='"+tipo+"',nota='"+nota+"',fecha_registro='"+fecha_registro+"' WHERE id='" + id + "' ");
             correcto = true;
         } catch (Exception ex) {
             ex.toString();
@@ -205,7 +205,7 @@ public class DbContactos extends DbHelper {
                 fileWriter.append(",");
                 fileWriter.append("Telefono");
                 fileWriter.append(",");
-                fileWriter.append("Correo electronico");
+                fileWriter.append("Miembro en plena comunion");
                 fileWriter.append(",");
                 fileWriter.append("Direccion");
                 fileWriter.append(",");

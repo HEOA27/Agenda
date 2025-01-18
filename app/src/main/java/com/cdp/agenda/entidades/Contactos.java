@@ -5,7 +5,7 @@ public class Contactos {
     private int id;
     private String nombre;
     private String telefono;
-    private String correo_electornico;
+    private String miembro_plena_comunion;
     private String direccion;
     private String sexo;
     private String fecha_nacimiento;
@@ -38,12 +38,20 @@ public class Contactos {
         this.telefono = telefono;
     }
 
-    public String getCorreo_electornico() {
+    /*public String getCorreo_electornico() {
         return correo_electornico;
     }
 
     public void setCorreo_electornico(String correo_electornico) {
         this.correo_electornico = correo_electornico;
+    }*/
+
+    public String getMiembro_plena_comunion() {
+        return miembro_plena_comunion;
+    }
+
+    public void setMiembro_plena_comunion(String miembro_plena_comunion) {
+        this.miembro_plena_comunion = miembro_plena_comunion;
     }
 
     public String getDireccion() {

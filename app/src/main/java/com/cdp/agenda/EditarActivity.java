@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +39,11 @@ public class EditarActivity extends AppCompatActivity {
     EditText txtNombre, txtTelefono, txtCorreo,txtDireccion,txtFechaNacimiento,txtNota;
     Spinner cbxGrupo,cbxTipo;
     RadioButton rbFemenino, rbMasculino;
-    TextView txtViewEdad,txtFechaRegistro;
+    TextView txtViewEdad,txtFechaRegistro,txtEsMiembro;
     ImageButton btnCalendario,btnLlamar;
+    Switch switchEsMiembro;
     private int dia,mes,ano,edad;
-    String sexo,fecha,fechadia,fechames,fechaano;
+    String sexo,fecha,fechadia,fechames,fechaano,miembro_plena_comunion;
     Button btnGuarda;
     FloatingActionButton fabEditar, fabEliminar;
     boolean correcto = false;
@@ -57,7 +59,9 @@ public class EditarActivity extends AppCompatActivity {
 
         txtNombre = findViewById(R.id.txtNombre);
         txtTelefono = findViewById(R.id.txtTelefono);
-        txtCorreo = findViewById(R.id.txtCorreoElectronico);
+       // txtCorreo = findViewById(R.id.txtCorreoElectronico);
+        switchEsMiembro = findViewById(R.id.switchEsMiembro);
+        txtEsMiembro=findViewById(R.id.txtEsmiembro);
         txtDireccion=findViewById(R.id.txtDireccion);
 
         txtFechaNacimiento=findViewById(R.id.txtFechaNacimiento);
@@ -108,6 +112,13 @@ public class EditarActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!txtNombre.getText().toString().equals("") && !txtTelefono.getText().toString().equals("")) {
+
+                    if(switchEsMiembro.isChecked()){
+                        miembro_plena_comunion="Es miembro";
+                    }else{
+                        miembro_plena_comunion="No es miembro";
+                    }
+
                     if(rbFemenino.isChecked()){
                         sexo="Femenino";
                     }else {
@@ -115,7 +126,7 @@ public class EditarActivity extends AppCompatActivity {
                     }
 
 
-                    correcto = dbContactos.editarContacto(id, txtNombre.getText().toString(), txtTelefono.getText().toString(), txtCorreo.getText().toString(), txtDireccion.getText().toString(),sexo,txtFechaNacimiento.getText().toString(),cbxGrupo.getSelectedItem().toString(),cbxTipo.getSelectedItem().toString(),txtNota.getText().toString(),txtFechaRegistro.getText().toString());
+                    correcto = dbContactos.editarContacto(id, txtNombre.getText().toString(), txtTelefono.getText().toString(), miembro_plena_comunion, txtDireccion.getText().toString(),sexo,txtFechaNacimiento.getText().toString(),cbxGrupo.getSelectedItem().toString(),cbxTipo.getSelectedItem().toString(),txtNota.getText().toString(),txtFechaRegistro.getText().toString());
 
 
                     if(correcto){
@@ -175,8 +186,16 @@ public class EditarActivity extends AppCompatActivity {
         if (contacto != null) {
             txtNombre.setText(contacto.getNombre());
             txtTelefono.setText(contacto.getTelefono());
-            txtCorreo.setText(contacto.getCorreo_electornico());
+            //txtCorreo.setText(contacto.getCorreo_electornico());
             txtDireccion.setText(contacto.getDireccion());
+
+            if(contacto.getMiembro_plena_comunion().equals("Es miembro")){
+                switchEsMiembro.setChecked(true);
+               // txtEsMiembro.setText("Es miembro en plena comunión");
+            }else{
+                switchEsMiembro.setChecked(false);
+               // txtEsMiembro.setText("No es miembro en plena comunión");
+            }
 
             if (contacto.getSexo().equals("Femenino")){
                 rbFemenino.setChecked(true);
