@@ -1,5 +1,9 @@
 # Agenda en Android Studio y SQLite
 Se desarrolla una aplicación móvil para agenda en Android Studio y SQLite.
+El proyecto se desarrolló en base a un proyecto del siguiente canal, pero se le ha incorporado más funcionalidades, campos en los formularios y pantallas.
+Es una agenda para una iglesia local.
+
+La base para construir el proyecto es el siguiente:
 
 ## Vídeo 1 📱
 - Creación de aplicación
@@ -43,16 +47,3 @@ Se desarrolla una aplicación móvil para agenda en Android Studio y SQLite.
 
 **Link del vídeo:** [https://youtu.be/2I1NkJNBz9M](https://youtu.be/2I1NkJNBz9M) 
 
-
-## Autores ✒️
-- **Marko Robles** - *Desarrollo* - [markorobles](https://github.com/markorobles)
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia GNU General Public License v3.0 - mira el archivo [LICENSE.md](LICENSE.md) para más detalles.
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ [Da clic aquí](https://www.paypal.com/paypalme/markorobles?locale.x=es_XC.) 
-* Da las gracias públicamente 🤓.
