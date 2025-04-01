@@ -165,6 +165,7 @@ public class DbContactos extends DbHelper {
                 contacto = new Contactos();
                 contacto.setId(cursorContactos.getInt(0));
                 contacto.setNombre(cursorContactos.getString(1));
+                contacto.setMiembro_plena_comunion(cursorContactos.getString(3));
                 contacto.setSexo(cursorContactos.getString(5));
                 contacto.setFecha_nacimiento(cursorContactos.getString(6));
                 contacto.setGrupo(cursorContactos.getString(7));

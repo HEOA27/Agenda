@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cdp.agenda.adaptadores.ListaFiltroGruposAdapter;
+import com.cdp.agenda.adaptadores.ListaFiltroMiembrosAdapter;
 import com.cdp.agenda.adaptadores.ListaFiltroTiposAdapter;
 import com.cdp.agenda.adaptadores.ListaFiltroCumpleanosAdapter;
 import com.cdp.agenda.db.DbContactos;
@@ -28,6 +29,7 @@ public class FiltroActivity extends AppCompatActivity {
    ListaFiltroCumpleanosAdapter adapter;
    ListaFiltroTiposAdapter adapterTipo;
    ListaFiltroGruposAdapter adapterGrupo;
+   ListaFiltroMiembrosAdapter adapterMiembroPC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class FiltroActivity extends AppCompatActivity {
         adapter = new ListaFiltroCumpleanosAdapter(dbContactos.mostrarContactosFiltros());
         adapterTipo = new ListaFiltroTiposAdapter(dbContactos.mostrarContactosFiltros());
         adapterGrupo = new ListaFiltroGruposAdapter(dbContactos.mostrarContactosFiltros());
+        adapterMiembroPC=new ListaFiltroMiembrosAdapter(dbContactos.mostrarContactosFiltros());
         try {
             adapter.filtroCumpleanos(0);
             listaFiltro.setAdapter(adapter);
@@ -204,6 +207,26 @@ public class FiltroActivity extends AppCompatActivity {
                         try {
                             count= adapterGrupo.filtroHombre(position);
                             listaFiltro.setAdapter(adapterGrupo);
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 13:
+                        //Cant.Miembros en plena comunión
+                        try {
+                            count= adapterMiembroPC.filtroMiembroPlenaComunion(position);
+                            listaFiltro.setAdapter(adapterMiembroPC);
+                            viewSeleccionado.setText("Total: " +count);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    case 14:
+                        //Cant. No miembros en plena comunión
+                        try {
+                            count= adapterMiembroPC.filtroNoMiembroPlenaComunion(position);
+                            listaFiltro.setAdapter(adapterMiembroPC);
                             viewSeleccionado.setText("Total: " +count);
                         } catch (ParseException e) {
                             throw new RuntimeException(e);

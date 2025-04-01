@@ -3,6 +3,8 @@ package com.cdp.agenda.adaptadores;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFiltroCumpleanosAdapter.ContactoViewHolder>{
     ArrayList<Contactos> listaContactos;
@@ -26,7 +31,7 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
     int mes,dia;
 
     boolean bandera;
-
+    String fecha;
 
     public ListaFiltroCumpleanosAdapter(ArrayList<Contactos> listaContactos) {
         this.listaContactos = listaContactos;
@@ -60,20 +65,27 @@ public class ListaFiltroCumpleanosAdapter extends RecyclerView.Adapter<ListaFilt
             String fMes = fmes.format(todayDate);
             int mesActual,idx1,idx2;
             mesActual=Integer.parseInt(fMes);
-            String fecha,fechames,fechadia;
-                for (Contactos contactos : listaOriginal) {
-                    fecha= contactos.getFecha_nacimiento();
-                    idx1= fecha.indexOf("/");
-                    idx2=fecha.indexOf("/",idx1+1);
-                    fechames=fecha.substring(idx1+1,idx2);
-                    mes=Integer.parseInt(fechames);
-                    fechadia=fecha.substring(0,idx1);
-                    dia=Integer.parseInt(fechadia);
-                    if (mesActual==mes) {
-                        listaContactos.add(contactos);
+            String fechames,fechadia;
+
+            /*for(Contactos con : listaOriginal){
+                if(con.getFecha_nacimiento().isEmpty()==false){
+                Log.d("", con.getNombre());}
+            }*/
+            for (Contactos contactos : listaOriginal) {
+                if(contactos.getFecha_nacimiento().isEmpty()==false){
+                        fecha = contactos.getFecha_nacimiento();
+                        idx1 = fecha.indexOf("/");
+                        idx2 = fecha.indexOf("/", idx1 + 1);
+                        fechames = fecha.substring(idx1 + 1, idx2);
+                        mes = Integer.parseInt(fechames);
+                        fechadia = fecha.substring(0, idx1);
+                        dia = Integer.parseInt(fechadia);
+                        if (mesActual == mes) {
+                            listaContactos.add(contactos);
+
+                        }
 
                     }
-
                 }
 
             }

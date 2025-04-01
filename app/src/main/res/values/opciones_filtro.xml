@@ -14,5 +14,7 @@
         <item>Asistencias Frecuente</item>
         <item>Mujeres</item>
         <item>Varones</item>
+        <item>Miembro en plena comunión</item>
+        <item>No es miembro</item>
     </string-array>
 </resources>

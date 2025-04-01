@@ -152,7 +152,7 @@ public class EditarActivity extends AppCompatActivity {
                     mes=c.get(Calendar.MONTH);
                     ano=c.get(Calendar.YEAR);
                     txtFechaRegistro.setText(dia + "/"+(mes+1)+"/"+ano);
-
+                    if(fecha!=null){
                     fecha=contacto.getFecha_nacimiento();
                     int idx1= fecha.indexOf("/");
                     int idx2=fecha.indexOf("/",idx1+1);
@@ -162,6 +162,7 @@ public class EditarActivity extends AppCompatActivity {
                     mes=Integer.parseInt(fecha_mes);
                     String fecha_ano=fecha.substring(idx2+1);
                     ano=Integer.parseInt(fecha_ano);
+                    }
                     DatePickerDialog datePickerDialog=new DatePickerDialog(EditarActivity.this,new DatePickerDialog.OnDateSetListener(){
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -173,6 +174,7 @@ public class EditarActivity extends AppCompatActivity {
                     }
                             ,ano,mes-1,dia);
                     datePickerDialog.show();
+
 
                 }
             }
