@@ -2,11 +2,12 @@
 Se desarrolla una aplicación móvil para agenda en Android Studio y SQLite.
 Es una agenda para una iglesia local.
 El proyecto se desarrolló en base a un proyecto existente, pero se le ha incorporado más funcionalidades como: 
--Filtros.
--Notificaciones.
--Exportar un archivo Excel.
--Modificación de campos en los formularios y pantallas.
--Validaciones
+
+- Filtros.
+- Notificaciones.
+- Exportar un archivo Excel.
+- Modificación de campos en los formularios y pantallas.
+- Validaciones
 
 La base para construir la primera parte del proyecto es del siguiente canal:
 
